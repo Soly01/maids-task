@@ -1,0 +1,37 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  background-color: #0c0c0c;
+  border-radius: 5px;
+}
+.p-skeleton {
+  background-color: #e0e0e0;
+}
+.skeleton {
+  background-color: #0c0c0c;
+
+  width: 360px;
+  height: 360px;
+}
+.p-card {
+  background-color: #141c26;
+}
+.p-card:hover {
+  transition: 0.5s;
+  box-shadow: 0px 4px 8px rgba(191, 53, 4, 0.6);
+}
+.p-card .p-card-title {
+  color: #fdfdfd;
+}
+.p-float-label {
+  display: inline-block;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+input {
+  border-radius: 6px;
+  width: 500px;
+  height: 40px;
+}
