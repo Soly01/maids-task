@@ -13,6 +13,7 @@ import { Users } from '../../../interface/user.interface';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { SearchPipe } from '../../pipe/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -26,7 +27,7 @@ import { Router } from '@angular/router';
     CommonModule,
     PaginatorModule,
     FloatLabelModule,
-
+    SearchPipe,
     FormsModule,
   ],
   templateUrl: './cards.component.html',
@@ -38,6 +39,7 @@ export class CardsComponent {
   first: number = 0;
   rows: number = 1;
   cards: Users[] = [];
+  searchTerm: string = '';
   totalRecords: number = 2;
   private cardsService = inject(CardsService);
   private router = inject(Router);

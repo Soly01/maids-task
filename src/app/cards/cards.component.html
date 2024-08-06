@@ -1,5 +1,10 @@
 <div class="userCards mt-5 mb-5 text-center flex-column w-100">
   <h1 class="justify-content-center">User Cards</h1>
+
+  <p-floatLabel>
+    <input pInputText id="search" [(ngModel)]="searchTerm" />
+    <label for="search"> <i class="pi pi-search"></i> Search </label>
+  </p-floatLabel>
 </div>
 <div class="col-xl-12 container mt-5 pt-5 card-container">
   @for (card of cards ; track $index ) {
