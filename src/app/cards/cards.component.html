@@ -7,7 +7,7 @@
   </p-floatLabel>
 </div>
 <div class="col-xl-12 container mt-5 pt-5 card-container">
-  @for (card of cards ; track $index ) {
+  @for (card of cards | search:searchTerm; track $index ) {
   <div class="mt-5 mb-5">
     <p-card
       (click)="navigateToDetails(card.id)"
