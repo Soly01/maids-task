@@ -27,15 +27,16 @@
       </div>
     </p-card>
   </div>
-  } @empty {
-  <app-skeleton [cardCount]="totalRecords"></app-skeleton>
-  }
+  } @empty { @if (cards.length) {
+  <h5 class="w-100 title">Theres Nothing Here</h5>
+  } @else { @for (skel of skeleton; track $index) {
+  <app-skeleton [cardCount]="skeleton.length"></app-skeleton>} } }
 </div>
 <div class="w-100 d-flex justify-content-center mb-5 d-flex">
   <p-paginator
     [first]="first"
     [rows]="rows"
-    [totalRecords]="totalRecords"
+    [totalRecords]="totalpages"
     [showCurrentPageReport]="true"
     [showPageLinks]="true"
     [showJumpToPageDropdown]="false"

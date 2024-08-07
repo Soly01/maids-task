@@ -5,4 +5,5 @@ export interface Users {
   last_name: string;
   avatar: string;
   total_pages: number;
+  per_page: number;
 }

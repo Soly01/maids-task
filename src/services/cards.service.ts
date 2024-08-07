@@ -10,14 +10,18 @@ export class CardsService {
   private usersCache = new Map<number, any>();
   private usersDetailsCache = new Map<number, any>();
   private http = inject(HttpClient);
-  getUsers(page: number): Observable<{ data: Users[] }> {
+  getUsers(
+    page: number
+  ): Observable<{ data: Users[]; total_pages: number; per_page: number }> {
     if (this.usersCache.has(page)) {
       console.log(`Retrieving data for page ${page} from cache`);
       return of(this.usersCache.get(page));
     } else {
       console.log(`Fetching data for page ${page} from server`);
       return this.http
-        .get<{ data: Users[] }>(`https://reqres.in/api/users?page=${page}`)
+        .get<{ data: Users[]; total_pages: number; per_page: number }>(
+          `https://reqres.in/api/users?page=${page}`
+        )
         .pipe(
           tap((data) => {
             this.usersCache.set(page, data);

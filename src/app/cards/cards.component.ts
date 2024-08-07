@@ -21,6 +21,8 @@ import { Subscription } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayDirective } from '../../directives/overlay.directive';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cards',
@@ -37,20 +39,27 @@ import { SkeletonComponent } from '../skeleton/skeleton.component';
     OverlayDirective,
     SkeletonComponent,
     SkeletonModule,
+    ToastModule,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   encapsulation: ViewEncapsulation.None,
+  providers: [MessageService],
 })
 export class CardsComponent implements OnInit, OnDestroy {
   first: number = 0;
   rows: number = 1;
   cards: Users[] = [];
+  skeleton: any[] = [];
   searchTerm: string = '';
-  totalRecords!: number;
+  perPage!: number;
+  totalpages!: number;
   cardsSubscription!: Subscription;
   private cardsService = inject(CardsService);
   private router = inject(Router);
+  constructor() {
+    this.skeleton.length = 6;
+  }
 
   ngOnInit(): void {
     this.getUserCards();
@@ -58,10 +67,11 @@ export class CardsComponent implements OnInit, OnDestroy {
 
   getUserCards(page: number = 1): void {
     this.cardsSubscription = this.cardsService.getUsers(page).subscribe({
-      next: (res: { data: Users[] }) => {
+      next: (res: { data: Users[]; total_pages: number; per_page: number }) => {
         this.cards = res.data;
+        this.totalpages = res.total_pages;
+        this.perPage = res.per_page;
         console.log(res);
-        this.totalRecords = res.data.length;
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
