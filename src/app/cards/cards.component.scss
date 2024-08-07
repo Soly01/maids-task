@@ -3,8 +3,14 @@
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 10px;
   justify-items: center;
-  background-color: #0c0c0c;
-  border-radius: 5px;
+  background-color: var(--background-color);
+  border-radius: 6px;
+}
+.title {
+  color: var(--text-color);
+  background-color: var(--secondry-color);
+  padding: 10px;
+  border-radius: 6px;
 }
 .p-skeleton {
   background-color: #e0e0e0;
@@ -16,22 +22,95 @@
   height: 360px;
 }
 .p-card {
-  background-color: #141c26;
+  cursor: pointer;
+  background-color: var(--secondry-color);
 }
-.p-card:hover {
-  transition: 0.5s;
-  box-shadow: 0px 4px 8px rgba(191, 53, 4, 0.6);
-}
+
 .p-card .p-card-title {
-  color: #fdfdfd;
+  color: var(--text-color);
 }
-.p-float-label {
-  display: inline-block;
-  margin-top: 20px;
-  border-radius: 5px;
-}
-input {
+.p-inputtext {
+  background: var(--background-color);
   border-radius: 6px;
-  width: 500px;
+  width: 300px;
   height: 40px;
+  color: var(--text-color);
+}
+.p-inputtext:enabled:focus {
+  box-shadow: var(--box-shadow);
+  border-color: var(--border-color);
+}
+.p-inputtext:enabled:hover {
+  border-color: var(--border-color);
+}
+label {
+  color: var(--text-color);
+}
+.overlay {
+  cursor: pointer;
+  position: relative; /* Changed from absolute to relative */
+  width: 360px;
+  height: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.overlay:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--hover-color);
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 0.5s ease, visibility 0.5s ease, opacity 0.5s ease;
+  border-radius: 6px;
+  z-index: 10;
+  transform: translateY(50%);
+}
+
+.overlay:hover:before {
+  visibility: visible;
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+.overlay-content {
+  cursor: pointer;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  text-align: center;
+  color: white;
+  z-index: 11;
+}
+
+.overlay:hover .overlay-content {
+  transition: opacity 0.5s ease 0.2s;
+}
+
+.overlay-content i {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color);
+}
+
+.overlay-content span {
+  color: var(--text-color);
+  font-size: 16px;
+}
+.p-paginator {
+  margin-bottom: 30px;
+  background-color: var(--background-color);
+}
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.p-paginator .p-paginator-current {
+  color: var(--border-color);
 }

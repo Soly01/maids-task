@@ -1,7 +1,8 @@
 import {
   Component,
   inject,
-  PLATFORM_ID,
+  OnDestroy,
+  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 import { CardModule } from 'primeng/card';
@@ -16,6 +17,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { SearchPipe } from '../../pipe/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { InputTextModule } from 'primeng/inputtext';
+import { OverlayDirective } from '../../directives/overlay.directive';
 
 @Component({
   selector: 'app-cards',
@@ -29,18 +33,20 @@ import { Router } from '@angular/router';
     FloatLabelModule,
     SearchPipe,
     FormsModule,
+    InputTextModule,
+    OverlayDirective,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   encapsulation: ViewEncapsulation.None,
-  host: { ngSkipHydration: 'true' },
 })
-export class CardsComponent {
+export class CardsComponent implements OnInit, OnDestroy {
   first: number = 0;
   rows: number = 1;
   cards: Users[] = [];
   searchTerm: string = '';
   totalRecords: number = 2;
+  cardsSubscription!: Subscription;
   private cardsService = inject(CardsService);
   private router = inject(Router);
 
@@ -49,7 +55,7 @@ export class CardsComponent {
   }
 
   getUserCards(page: number = 1): void {
-    this.cardsService.getUserWithoutChache(page).subscribe({
+    this.cardsSubscription = this.cardsService.getUsers(page).subscribe({
       next: (res: { data: Users[] }) => {
         this.cards = res.data;
         console.log(res);
@@ -71,5 +77,10 @@ export class CardsComponent {
   }
   navigateToDetails(userId: number) {
     this.router.navigate([`cardsDetails/${userId}`]);
+  }
+  ngOnDestroy(): void {
+    if (this.cardsSubscription) {
+      this.cardsSubscription.unsubscribe();
+    }
   }
 }

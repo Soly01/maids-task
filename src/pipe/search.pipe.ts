@@ -10,11 +10,6 @@ export class SearchPipe implements PipeTransform {
     if (!users || !searchTerm) {
       return users;
     }
-    searchTerm = searchTerm.toLowerCase();
-    return users.filter(
-      (user) =>
-        user.first_name.toLowerCase().includes(searchTerm) ||
-        user.last_name.toLowerCase().includes(searchTerm)
-    );
+    return users.filter((user) => user.id.toString().includes(searchTerm));
   }
 }

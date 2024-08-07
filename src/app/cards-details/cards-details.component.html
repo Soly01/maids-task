@@ -1,1 +1,49 @@
-<p>cards-details works!</p>
+<div class="container d-flex justify-content-center flex-column mt-5 pt-5">
+  @if (userDetails) {
+  <h1 class="mb-5 mt-5 title d-flex justify-content-center">User Detail</h1>
+  <button
+    pButton
+    routerLink="/card"
+    pRipple
+    icon="pi pi-arrow-left    "
+    class="--bs-danger"
+  ></button>
+  <div class="mt-5 mb-5 align-self-center">
+    <p-card
+      header="{{ userDetails.first_name }} {{ userDetails.last_name }}"
+      subheader="User's ID: {{ userDetails.id }}"
+      [style]="{ width: '360px' }"
+    >
+      <ng-template pTemplate="header">
+        <p-avatar
+          image="{{ userDetails.avatar }}"
+          styleClass="mr-2"
+          size="xlarge"
+          shape="circle"
+        />
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <h5>
+          Email:
+          <a
+            class="text-decoration-none"
+            href="mailto:{{ userDetails.email }}"
+            >{{ userDetails.email }}</a
+          >
+        </h5>
+      </ng-template>
+    </p-card>
+  </div>
+
+  }@else {
+  <div class="skeleton mt-5 h-50 w-100 col-xl-12 surface-card">
+    <p-skeleton width="360px" height="360px"></p-skeleton>
+    <div class="flex mb-3">
+      <div class="mt-5">
+        <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+      </div>
+    </div>
+  </div>
+  }
+</div>

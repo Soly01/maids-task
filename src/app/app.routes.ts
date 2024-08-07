@@ -13,11 +13,7 @@ export const routes: Routes = [
         (c) => c.CardsDetailsComponent
       ),
   },
-  {
-    path: 'home',
-    loadComponent: () =>
-      import('./home/home.component').then((c) => c.HomeComponent),
-  },
+
   {
     path: '**',
     redirectTo: 'cards',

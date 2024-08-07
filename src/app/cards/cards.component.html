@@ -1,15 +1,18 @@
-<div class="userCards mt-5 mb-5 text-center flex-column w-100">
-  <h1 class="justify-content-center">User Cards</h1>
-
-  <p-floatLabel>
-    <input pInputText id="search" [(ngModel)]="searchTerm" />
-    <label for="search"> <i class="pi pi-search"></i> Search </label>
-  </p-floatLabel>
+<div class="userCards container mt-5 mb-5 text-center flex-column w-100">
+  <h1 class="title justify-content-center">User Cards</h1>
+  <div class="d-flex align-items-center mt-5 flex-column">
+    <p-floatLabel>
+      <input id="search" type="text" pInputText [(ngModel)]="searchTerm" />
+      <label for="search"><i class="pi pi-search"></i> Search</label>
+    </p-floatLabel>
+  </div>
 </div>
-<div class="col-xl-12 container mt-5 pt-5 card-container">
-  @for (card of cards | search:searchTerm; track $index ) {
+<div class="col-xl-12 container mt-5 pt-5 mb-5 card-container">
+  @for (card of cards | search:searchTerm; track $index) {
   <div class="mt-5 mb-5">
     <p-card
+      appOverlay
+      class="position-relative overlay"
       (click)="navigateToDetails(card.id)"
       header="{{ card.first_name }}"
       subheader="{{ card.last_name }}"
@@ -18,6 +21,10 @@
       <ng-template pTemplate="header">
         <img height="354px" alt="Card" [src]="card.avatar" />
       </ng-template>
+      <div class="overlay-content">
+        <i class="pi pi-eye"></i>
+        <span>Show Details</span>
+      </div>
     </p-card>
   </div>
   } @empty {
@@ -32,7 +39,7 @@
   </div>
   }
 </div>
-<div class="w-100 d-flex justify-content-center mt-5 d-flex">
+<div class="w-100 d-flex justify-content-center mb-5 d-flex">
   <p-paginator
     [first]="first"
     [rows]="rows"

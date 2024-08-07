@@ -1,0 +1,41 @@
+.p-avatar.p-avatar-xl {
+  margin-top: 20px;
+  width: 10rem;
+  height: 10rem;
+  font-size: 2rem;
+  margin-left: 100px;
+  margin-bottom: 25px;
+}
+.p-card-header {
+  background-color: var(--text-color);
+}
+.p-card-title {
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+.p-card-subtitle {
+  color: var(--hover-color);
+}
+.p-card {
+  background-color: var(--background-color);
+}
+.p-card:hover {
+  transition: 0.5s;
+  box-shadow: var(--box-shadow);
+}
+h5 {
+  color: var(--hover-color);
+}
+a {
+  color: var(--text-color);
+}
+.p-button {
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+.title {
+  color: var(--text-color);
+  background-color: var(--secondry-color);
+  padding: 10px;
+  border-radius: 6px;
+}

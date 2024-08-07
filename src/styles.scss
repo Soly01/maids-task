@@ -2,3 +2,7 @@
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import "themes.scss";
+body {
+  background-color: var(--body-color);
+}
