@@ -36,14 +36,6 @@
   </div>
 
   }@else {
-  <div class="skeleton mt-5 h-50 w-100 col-xl-12 surface-card">
-    <p-skeleton width="360px" height="360px"></p-skeleton>
-    <div class="flex mb-3">
-      <div class="mt-5">
-        <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-      </div>
-    </div>
-  </div>
+  <app-skeleton [cardCount]="totalRecords"></app-skeleton>
   }
 </div>

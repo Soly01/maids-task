@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayDirective } from '../../directives/overlay.directive';
+import { SkeletonComponent } from '../skeleton/skeleton.component';
 
 @Component({
   selector: 'app-cards',
@@ -27,7 +28,6 @@ import { OverlayDirective } from '../../directives/overlay.directive';
   imports: [
     CardModule,
     ButtonModule,
-    SkeletonModule,
     CommonModule,
     PaginatorModule,
     FloatLabelModule,
@@ -35,6 +35,8 @@ import { OverlayDirective } from '../../directives/overlay.directive';
     FormsModule,
     InputTextModule,
     OverlayDirective,
+    SkeletonComponent,
+    SkeletonModule,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -45,7 +47,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   rows: number = 1;
   cards: Users[] = [];
   searchTerm: string = '';
-  totalRecords: number = 2;
+  totalRecords!: number;
   cardsSubscription!: Subscription;
   private cardsService = inject(CardsService);
   private router = inject(Router);
@@ -59,6 +61,7 @@ export class CardsComponent implements OnInit, OnDestroy {
       next: (res: { data: Users[] }) => {
         this.cards = res.data;
         console.log(res);
+        this.totalRecords = res.data.length;
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {

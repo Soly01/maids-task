@@ -1,0 +1,13 @@
+<div
+  class="skeleton-wrapper d-flex flex-row flex-wrap mt-5 h-50 col-xl-12 surface-card"
+>
+  @for (skeleton of skeletons; track $index) {
+  <p-skeleton width="360px" height="360px"></p-skeleton>
+  <div class="flex mb-3">
+    <div class="mt-5">
+      <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+    </div>
+  </div>
+  }
+</div>
