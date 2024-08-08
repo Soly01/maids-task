@@ -1,12 +1,12 @@
 Project Title:
-# Angular Quiz: Dynamic User Dashboard
+# Maids-Task Using Angular 17
 
 ## Overview
 
-This project is a dynamic user dashboard built as part of a task for a job interview. The application demonstrates advanced Angular (7+) features, including state management, custom directives, observables, caching, and user interface enhancements. The dashboard provides functionalities like paginated user lists, a search feature, and detailed user pages.
+This project is a dynamic user dashboard built as part of a task for a job interview. The application demonstrates advanced Angular (7+) features, including state management, custom directives, observables, caching, and user interface enhancements. The dashboard provides functionalities like paginated user lists, a search feature, and detailed user pages and implementing SSR.
 
 ## Features
-
+- **SSR**: Implementing SSR to increase SEO and preformance of the application .
 - **Pagination**: Display a list of users with paginated navigation.
 - **Search Functionality**: Instant search field to find users by ID.
 - **User Details Page**: View detailed information of selected users with a back navigation.
@@ -16,15 +16,16 @@ This project is a dynamic user dashboard built as part of a task for a job inter
 - **Caching**: Implement caching to optimize performance and reduce redundant HTTP requests.
 - **Loading Bar**: Display a loading indicator during network requests.
 - **Styling & Animations**: Apply proper styling and animations for a polished UI.
+- **Themes**: Implementing two themes and switching between them by header's buttons.
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/angular-user-dashboard.git
+   git clone https://github.com/Soly01/maids-task.git
 2- Navigate to the project directory:
 
-cd angular-user-dashboard
+cd maids-task
 
 3- Install the dependencies:
 
@@ -44,19 +45,6 @@ ng serve
 3. **View Details**: Click on a user's card to view their detailed information.
 4. **Navigation**: Use the back button on the details page to return to the main user list.
 
-## Code Structure
-
-The project is structured as follows:
-
-- **src/app**: Contains all the Angular components, services, and modules.
-  - **components**: Contains the user list, user details, and search components.
-  - **services**: Contains the `CardsService` for handling HTTP requests and caching.
-  - **store**: Contains NgRx store setup for state management.
-  - **directives**: Contains custom directives used in the project.
-  - **models**: Contains TypeScript interfaces for the project.
-- **assets**: Contains static assets like images.
-- **styles**: Global styles and theming for the application.
-
 
 ## API Endpoints
 
@@ -69,9 +57,8 @@ The project is structured as follows:
 - **NgRx**: State management.
 - **RxJS**: Handling asynchronous operations.
 - **PrimeNG**: UI components library.
-- **Angular Material**: Additional UI components.
 - **TypeScript**: Programming language used.
-- **HTML & CSS**: Markup and styling.
+- **HTML & SCSS**: Markup and styling.
 
 ```
 ## Project Structure
@@ -81,27 +68,57 @@ The project is organized into the following directories and files:
 ```plaintext
 src/
 ├── app/
-│   ├── components/               # Components for different UI sections
-│   │   ├── quiz.component.ts       # Quiz component (if applicable)
-│   │   ├── user-list.component.ts  # Component for displaying the list of users
-│   │   ├── user-details.component.ts # Component for displaying user details
-│   │   ├── search-bar.component.ts  # Component for the search functionality
-│   │   ├── loading-bar.component.ts # (Optional) Component for visual feedback during data loading
-│   │   └── ...                     # Other components as needed
-│   ├── services/                  # Services for data access and manipulation
-│   │   └── user.service.ts          # Service for fetching user data
-│   ├── models/                    # Data models for users
-│   │   └── user.model.ts            # User model interface
-│   ├── app.module.ts              # Main application module
-│   ├── app.component.ts           # Root component
-│   ├── app.routing.module.ts      # Routing configuration
-│   ├── app.component.html         # Root component template
-│   ├── app.component.css          # Root component styles
+│   ├── components/                   # folder for different UI sections
+│   │   ├── cards                         # Component for list of users
+│   │       ├── cards.component.html            # cards component 
+│   │       ├── cards.component.scss            # cards component 
+│   │       ├── cards.component.ts              # cards component 
+│   │   ├── cards-details                 # Component for user details 
+│   │       ├── cards-details.component.html    # cards-details component 
+│   │       ├── cards-details.component.scss    # cards-details component 
+│   │       ├── cards-details.component.ts      # cards-details component 
+│   ├── core                             
+│   │   ├── directives                    # folder for directives
+│   │        ├── overlay.directive.ts           # directive for showing the span and icon 
+│   │   ├── interface                     # folder for interface
+│   │        ├──  user.interface.ts             # interface for data types
+│   │   ├── pipe                          # folder for pipes
+│   │        ├── search.pipe.ts                 # pipe for search in user list
+│   │   ├── services                      # folder for services
+│   │        ├── cards.service.ts               # service for returning http request
+│   ├── shared                            # folder for shared components
+│       ├── header/                       # Component for header
+│   │        └── header.component.html          # header component
+│   │        └── header.component.scss          # header component
+│   │        └── header.component.ts            # header component
+│       ├── skeleton/                     # Component for skeleton-loader 
+│   │        └── skeleton.component.html        # skeleton component
+│   │        └── skeleton.component.scss        # skeleton component
+│   │        └── skeleton.component.ts          # skeleton component
+│   ├── store/                            # NGRX Store
+│   │        └── user.actions.ts               # NGRX actions
+│   │        └── user.effects.ts               # NGRX effects
+│   │        └── user.reducer.ts               # NGRX reducer
+│   │        └── user.selectors.ts             # NGRX selectors
+│   ├── app.component.html               # Root component template
+│   ├── app.component.scss               # Root component styles
+│   ├── app.component.ts                 # Root component
+│   ├── app.server.config.ts             # Main application module
+│   ├── app.config.ts                    # Main application module
+│   ├── app.routes.ts                    # Routing configuration
 ├── assets/                        # Images, fonts, and other static assets
-├── README.md                      # Project documentation
+├── favicon.ico/                   # Application favicon
+├── index.html/                    # index
+├── main.server.ts/                # SSR Server
+├── main.ts/                       # Main
+├── styles.scss/                   # Global Styles
+├── themes.scss/                   # themes
+├── .editorconfig/                 # editorconfi
+├── .gitgnore/                     # gitgnore
 ├── package.json                   # Project dependencies
-├── tsconfig.json                  # TypeScript configuration (Optional if using custom settings)
-└── angular.json                   # Angular CLI configuration (Optional if not using default settings)
-onal if using custom settings)
-angular.json (Angular CLI configuration) (Optional if not using default settings)
+├── tsconfig.json                  # TypeScript configuration 
+└── angular.json                   # Angular CLI configuration
+├── README.md                      # Project documentation
+├── server.ts                      # Server
+
 
