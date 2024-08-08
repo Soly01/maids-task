@@ -74,29 +74,34 @@ The project is structured as follows:
 - **HTML & CSS**: Markup and styling.
 
 ```
-Project Structure:
+## Project Structure
 
+The project is organized into the following directories and files:
+
+```plaintext
 src/
-app/
-components/ (Components for different UI sections)
-quiz.component.ts
-user-list.component.ts
-user-details.component.ts
-search-bar.component.ts
-loading-bar.component.ts (Optional for visual feedback)
-... (Other components as needed)
-services/ (Services for data access and manipulation)
-user.service.ts
-models/ (Data models for users)
-user.model.ts
-app.module.ts (Main application module)
-app.component.ts (Root component)
-app.routing.module.ts (Routing configuration)
-app.component.html (Root component template)
-app.component.css (Root component styles)
-assets/ (Images, fonts, and other static assets)
-README.md (Project documentation)
-package.json (Project dependencies)
-tsconfig.json (TypeScript configuration) (Optional if using custom settings)
+├── app/
+│   ├── components/               # Components for different UI sections
+│   │   ├── quiz.component.ts       # Quiz component (if applicable)
+│   │   ├── user-list.component.ts  # Component for displaying the list of users
+│   │   ├── user-details.component.ts # Component for displaying user details
+│   │   ├── search-bar.component.ts  # Component for the search functionality
+│   │   ├── loading-bar.component.ts # (Optional) Component for visual feedback during data loading
+│   │   └── ...                     # Other components as needed
+│   ├── services/                  # Services for data access and manipulation
+│   │   └── user.service.ts          # Service for fetching user data
+│   ├── models/                    # Data models for users
+│   │   └── user.model.ts            # User model interface
+│   ├── app.module.ts              # Main application module
+│   ├── app.component.ts           # Root component
+│   ├── app.routing.module.ts      # Routing configuration
+│   ├── app.component.html         # Root component template
+│   ├── app.component.css          # Root component styles
+├── assets/                        # Images, fonts, and other static assets
+├── README.md                      # Project documentation
+├── package.json                   # Project dependencies
+├── tsconfig.json                  # TypeScript configuration (Optional if using custom settings)
+└── angular.json                   # Angular CLI configuration (Optional if not using default settings)
+onal if using custom settings)
 angular.json (Angular CLI configuration) (Optional if not using default settings)
 
