@@ -107,3 +107,13 @@ label {
 .p-paginator .p-paginator-current {
   color: var(--border-color);
 }
+@media (max-width: 991px) {
+  .title {
+    top: 337px;
+  }
+}
+@media (max-width: 425px) {
+  .title {
+    top: 385px;
+  }
+}
