@@ -2,7 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 import {
   getUsers,
   getUsersSuccess,
-  getUsersFailure,
   getUserDetails,
   getUserDetailsSuccess,
 } from './user.actions';

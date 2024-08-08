@@ -3,6 +3,7 @@ import {
   inject,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
 import { CardModule } from 'primeng/card';
@@ -10,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UsersRes } from '../../core/interface/user.interface';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
@@ -60,28 +61,31 @@ export class CardsComponent implements OnInit, OnDestroy {
   private cardsService = inject(CardsService);
   private router = inject(Router);
   private store = inject(Store);
+  private platformID = inject(PLATFORM_ID);
   constructor() {
     this.skeleton.length = 6;
   }
 
   ngOnInit(): void {
-    const storedPage = localStorage.getItem('page');
-    const page = storedPage ? JSON.parse(storedPage) : 1;
-    this.first = (page - 1) * this.rows;
-    this.store.dispatch(getUsers({ Page: page }));
-    this.cardsSubscription = this.cardsService.selectAllUsers().subscribe({
-      next: (res) => {
-        this.cards = res;
-        this.totalpages = res.total_pages;
-        this.perPage = res.per_page;
-        localStorage.setItem('page', JSON.stringify(res.page));
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status === 404) {
-          console.log(err.statusText);
-        }
-      },
-    });
+    if (isPlatformBrowser(this.platformID)) {
+      const storedPage = localStorage.getItem('page');
+      const page = storedPage ? JSON.parse(storedPage) : 1;
+      this.first = (page - 1) * this.rows;
+      this.store.dispatch(getUsers({ Page: page }));
+      this.cardsSubscription = this.cardsService.selectAllUsers().subscribe({
+        next: (res) => {
+          this.cards = res;
+          this.totalpages = res.total_pages;
+          this.perPage = res.per_page;
+          localStorage.setItem('page', JSON.stringify(res.page));
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            console.log(err.statusText);
+          }
+        },
+      });
+    }
   }
 
   onPageChange(event: any): void {

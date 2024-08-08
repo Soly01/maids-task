@@ -6,9 +6,14 @@
   background-color: var(--background-color);
   border-radius: 6px;
 }
+.userCards {
+  background-color: var(--secondry-color);
+  padding: 30px 20px;
+  border-radius: 15px;
+}
 .title {
   color: var(--text-color);
-  background-color: var(--secondry-color);
+  background-color: var(--background-color);
   padding: 10px;
   border-radius: 6px;
   top: 342px;
