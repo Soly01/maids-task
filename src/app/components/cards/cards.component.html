@@ -16,10 +16,9 @@
       (click)="navigateToDetails(card.id)"
       header="{{ card.first_name }}"
       subheader="{{ card.last_name }}"
-      [style]="{ width: '360px' }"
     >
       <ng-template pTemplate="header">
-        <img height="354px" alt="Card" [src]="card.avatar" />
+        <img alt="Card" [src]="card.avatar" />
       </ng-template>
       <div class="overlay-content">
         <i class="pi pi-eye"></i>
