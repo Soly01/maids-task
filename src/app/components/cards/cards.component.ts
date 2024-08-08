@@ -26,6 +26,7 @@ import { Store } from '@ngrx/store';
 import { getUsers } from '../../store/user.actions';
 import { SearchPipe } from '../../core/pipe/search.pipe';
 import { CardsService } from '../../core/services/cards.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-cards',
@@ -48,6 +49,14 @@ import { CardsService } from '../../core/services/cards.service';
   styleUrl: './cards.component.scss',
   encapsulation: ViewEncapsulation.None,
   providers: [MessageService],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class CardsComponent implements OnInit, OnDestroy {
   first: number = 0;

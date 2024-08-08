@@ -1,47 +1,50 @@
-<div class="userCards container mt-5 mb-5 text-center flex-column w-100">
-  <h1 class="title justify-content-center">Users List</h1>
-  <div class="d-flex align-items-center mt-5 flex-column">
-    <p-floatLabel>
-      <input id="search" type="text" pInputText [(ngModel)]="searchTerm" />
-      <label for="search"><i class="pi pi-search"></i> Search</label>
-    </p-floatLabel>
+<section [@fadeIn]>
+  <div class="userCards container mt-5 mb-5 text-center flex-column w-100">
+    <h1 class="title justify-content-center">Users List</h1>
+    <div class="d-flex align-items-center mt-5 flex-column">
+      <p-floatLabel>
+        <input id="search" type="text" pInputText [(ngModel)]="searchTerm" />
+        <label for="search"><i class="pi pi-search"></i> Search</label>
+      </p-floatLabel>
+    </div>
   </div>
-</div>
-<div class="col-xl-12 container mt-5 pt-5 mb-5 card-container">
-  @for (card of cards.data| search:searchTerm; track $index) {
-  <div class="mt-5 mb-5">
-    <p-card
-      appOverlay
-      class="position-relative overlay"
-      (click)="navigateToDetails(card.id)"
-      header="{{ card.first_name }}"
-      subheader="{{ card.last_name }}"
-    >
-      <ng-template pTemplate="header">
-        <img alt="Card" [src]="card.avatar" />
-      </ng-template>
-      <div class="overlay-content">
-        <i class="pi pi-eye"></i>
-        <span>Show Details</span>
-      </div>
-    </p-card>
-  </div>
-  } @empty { @if (cards.data.length) {
-  <h5 class="text-center title position-absolute">Theres Nothing Here</h5>
-  } @else { @for (skel of skeleton; track $index) {
+  <div class="col-xl-12 container mt-5 pt-5 mb-5 card-container">
+    @for (card of cards.data| search:searchTerm; track $index) {
+    <div class="mt-5 mb-5">
+      <p-card
+        appOverlay
+        class="position-relative overlay"
+        (click)="navigateToDetails(card.id)"
+        header="{{ card.first_name }}"
+        subheader="{{ card.last_name }}"
+      >
+        <ng-template pTemplate="header">
+          <img alt="Card" [src]="card.avatar" />
+        </ng-template>
+        <div class="overlay-content">
+          <i class="pi pi-eye"></i>
+          <span>Show Details</span>
+        </div>
+      </p-card>
+    </div>
+    } @empty { @if (cards.data.length) {
+    <h5 class="text-center title position-absolute">Theres Nothing Here</h5>
+    } @else { @for (skel of skeleton; track $index) {
 
-  <app-skeleton [cardCount]="skeleton.length"></app-skeleton>} } }
-</div>
-<div
-  class="w-100 pag container d-flex justify-content-center mb-5 align-self-center"
->
-  <p-paginator
-    [first]="first"
-    [rows]="rows"
-    [totalRecords]="totalpages"
-    [showCurrentPageReport]="true"
-    [showPageLinks]="true"
-    [showJumpToPageDropdown]="false"
-    (onPageChange)="onPageChange($event)"
-  />
-</div>
+    <app-skeleton [cardCount]="skeleton.length"></app-skeleton>} } }
+  </div>
+  <div
+    class="w-100 pag container d-flex justify-content-center mb-5 align-self-center"
+  >
+    <p-paginator
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="totalpages"
+      [showCurrentPageReport]="true"
+      [showPageLinks]="true"
+      [showJumpToPageDropdown]="false"
+      (onPageChange)="onPageChange($event)"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+    />
+  </div>
+</section>

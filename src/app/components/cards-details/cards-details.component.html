@@ -1,4 +1,5 @@
-<div
+<section
+  [@fadeIn]
   class="container details d-flex justify-content-center flex-column mt-5 pt-5"
 >
   @if (userDetails) {
@@ -14,7 +15,6 @@
     <p-card
       header="{{ userDetails.first_name }} {{ userDetails.last_name }}"
       subheader="User's ID: {{ userDetails.id }}"
-      [style]="{ width: '360px' }"
     >
       <ng-template pTemplate="header">
         <p-avatar
@@ -41,4 +41,4 @@
   }@else {
   <app-skeleton [cardCount]="totalRecords"></app-skeleton>
   }
-</div>
+</section>

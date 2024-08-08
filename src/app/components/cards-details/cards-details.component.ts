@@ -12,6 +12,7 @@ import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
 import { Store } from '@ngrx/store';
 import { getUserDetails } from '../../store/user.actions';
 import { CardsService } from '../../core/services/cards.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-cards-details',
@@ -28,6 +29,14 @@ import { CardsService } from '../../core/services/cards.service';
   templateUrl: './cards-details.component.html',
   styleUrl: './cards-details.component.scss',
   encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class CardsDetailsComponent implements OnInit {
   userId!: number;
