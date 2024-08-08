@@ -36,7 +36,6 @@ ng serve
 
 5- Open a web browser and navigate to http://localhost:4200/.
 
-#### Usage
 ```markdown
 ## Usage
 
@@ -74,6 +73,7 @@ The project is structured as follows:
 - **TypeScript**: Programming language used.
 - **HTML & CSS**: Markup and styling.
 
+```
 Project Structure:
 
 src/
