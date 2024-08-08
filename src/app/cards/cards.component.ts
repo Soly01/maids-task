@@ -67,31 +67,26 @@ export class CardsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.getUserCards();
     this.store.dispatch(loadUsers({ Page: 1 }));
-    this.cardsService.selectAllUsers().subscribe((data) => {
-      this.cards = data;
-      this.totalpages = data.total_pages;
-      this.perPage = data.per_page;
-      console.log(data);
+    this.cardsSubscription = this.cardsService
+      .selectAllUsers()
+      .subscribe((data) => {
+        this.cards = data;
+        this.totalpages = data.total_pages;
+        this.perPage = data.per_page;
+        console.log(data);
+      });
+    this.cardsSubscription = this.cardsService.selectAllUsers().subscribe({
+      next: (res) => {
+        this.cards = res;
+        console.log(this.cards);
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 404) {
+          console.log(err.statusText);
+        }
+      },
     });
   }
-
-  // getUserCards(page: number = 1): void {
-  //   this.cardsSubscription = this.cardsService.getUsers(page).subscribe({
-  //     next: (data: UsersResponse) => {
-  //       this.cards = data;
-  //       this.totalpages = data.total_pages;
-  //       this.perPage = data.per_page;
-  //       console.log(data);
-  //     },
-  //     error: (err: HttpErrorResponse) => {
-  //       if (err.status === 404) {
-  //         console.error('Data not found', err);
-  //       } else {
-  //         console.error('An error occurred', err);
-  //       }
-  //     },
-  //   });
-  // }
 
   onPageChange(event: any): void {
     this.first = event.first;

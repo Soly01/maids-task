@@ -41,33 +41,26 @@ export class CardsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.userId = +params['id'];
-      // this.getUserDetails(this.userId);
     });
     this.store.dispatch(loadUserDetails({ id: this.userId }));
-    this.cardsDetailsService.selectUserDetails().subscribe((data) => {
-      this.userDetails = data!;
 
-      console.log(this.userDetails);
-    });
+    this.userDetailsSubscription = this.cardsDetailsService
+      .selectUserDetails()
+      .subscribe({
+        next: (res) => {
+          this.userDetails = res!;
+          console.log(this.userDetails);
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            console.log('User not found');
+          } else {
+            console.log('An error occurred', err);
+          }
+        },
+      });
   }
-  // getUserDetails(id: number) {
-  //   this.userDetailsSubscription = this.cardsDetailsService
-  //     .getUserDetails(id)
-  //     .subscribe({
-  //       next: (res: { data: User }) => {
-  //         this.userDetails = res.data;
 
-  //         console.log(res);
-  //       },
-  //       error: (err: HttpErrorResponse) => {
-  //         if (err.status === 404) {
-  //           console.log('User not found');
-  //         } else {
-  //           console.log('An error occurred', err);
-  //         }
-  //       },
-  //     });
-  // }
   ngOnDestroy(): void {
     if (this.userDetailsSubscription) {
       this.userDetailsSubscription.unsubscribe();
