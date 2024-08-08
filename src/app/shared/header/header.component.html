@@ -9,12 +9,19 @@
       /></a>
     </div>
     <div class="avatarDiv me-3 d-flex align-self-center">
-      <div class="d-flex">
-        <button (click)="changeTheme('redandblue')" class="blue me-2"></button>
-        <button
+      <div class="d-flex p-2">
+        <p-badge
+          badgeSize="large"
+          class="p-1"
+          (click)="changeTheme('redandblue')"
+          severity="danger"
+        />
+        <p-badge
+          badgeSize="large"
+          class="p-1"
           (click)="changeTheme('blackandgold')"
-          class="gold me-2"
-        ></button>
+          severity="success"
+        />
       </div>
       <a target="_blank" href="https://ng-portfolio-one.vercel.app/home">
         <p-avatar
