@@ -4,12 +4,14 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardsService } from '../../services/cards.service';
 import { Subscription } from 'rxjs';
-import { Users } from '../../../interface/user.interface';
+import { User } from '../../../interface/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
 import { AvatarModule } from 'primeng/avatar';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { Store } from '@ngrx/store';
+import { loadUserDetails } from '../store/user.actions';
 
 @Component({
   selector: 'app-cards-details',
@@ -29,36 +31,43 @@ import { SkeletonComponent } from '../skeleton/skeleton.component';
 })
 export class CardsDetailsComponent implements OnInit {
   userId!: number;
-  userDetails!: Users;
+  userDetails!: User;
   totalRecords: number = 1;
   private cardsDetailsService = inject(CardsService);
   private route = inject(ActivatedRoute);
+  private store = inject(Store);
   userDetailsSubscription!: Subscription;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.userId = +params['id'];
-      this.getUserDetails(this.userId);
+      // this.getUserDetails(this.userId);
+    });
+    this.store.dispatch(loadUserDetails({ id: this.userId }));
+    this.cardsDetailsService.selectUserDetails().subscribe((data) => {
+      this.userDetails = data!;
+
+      console.log(this.userDetails);
     });
   }
-  getUserDetails(id: number) {
-    this.userDetailsSubscription = this.cardsDetailsService
-      .getUserDetails(id)
-      .subscribe({
-        next: (res: { data: Users }) => {
-          this.userDetails = res.data;
+  // getUserDetails(id: number) {
+  //   this.userDetailsSubscription = this.cardsDetailsService
+  //     .getUserDetails(id)
+  //     .subscribe({
+  //       next: (res: { data: User }) => {
+  //         this.userDetails = res.data;
 
-          console.log(res);
-        },
-        error: (err: HttpErrorResponse) => {
-          if (err.status === 404) {
-            console.log('User not found');
-          } else {
-            console.log('An error occurred', err);
-          }
-        },
-      });
-  }
+  //         console.log(res);
+  //       },
+  //       error: (err: HttpErrorResponse) => {
+  //         if (err.status === 404) {
+  //           console.log('User not found');
+  //         } else {
+  //           console.log('An error occurred', err);
+  //         }
+  //       },
+  //     });
+  // }
   ngOnDestroy(): void {
     if (this.userDetailsSubscription) {
       this.userDetailsSubscription.unsubscribe();
