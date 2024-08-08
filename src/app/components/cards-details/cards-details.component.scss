@@ -1,41 +1,51 @@
-.p-avatar.p-avatar-xl {
-  margin-top: 20px;
-  width: 10rem;
-  height: 10rem;
-  font-size: 2rem;
-  margin-left: 100px;
-  margin-bottom: 25px;
-}
-.p-card-header {
-  background-color: var(--text-color);
-}
-.p-card-title {
-  margin-bottom: 20px;
-  color: var(--text-color);
-}
-.p-card-subtitle {
-  color: var(--hover-color);
+.details {
+  padding: 10px 200px;
+  background-color: var(--bg-300);
+  border-radius: 20px;
 }
 .p-card {
-  background-color: var(--background-color);
+  background-color: var(--primary-200);
+  .p-avatar.p-avatar-xl {
+    margin-top: 20px;
+    width: 10rem;
+    height: 10rem;
+    font-size: 2rem;
+    margin-left: 100px;
+    margin-bottom: 25px;
+  }
+  .p-card-header {
+    background-color: var(--bg-200);
+  }
+  .p-card-title {
+    margin-bottom: 20px;
+    color: var(--text-100);
+  }
+  .p-card-subtitle {
+    color: var(--accent-200);
+  }
 }
 .p-card:hover {
   transition: 0.5s;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--primary-300);
 }
 h5 {
-  color: var(--hover-color);
+  color: var(--text-100);
 }
 a {
-  color: var(--text-color);
+  color: var(--accent-200);
 }
 .p-button {
-  color: var(--text-color);
-  background-color: var(--background-color);
+  color: var(--bg-200);
+  background-color: var(--primary-100);
+  border-color: var(--accent-200);
+}
+.p-button:hover {
+  transition: 0.5s;
+  color: var(--primary-200);
 }
 .title {
-  color: var(--text-color);
-  background-color: var(--secondry-color);
+  color: var(--text-100);
+  background-color: var(--bg-200);
   padding: 10px;
   border-radius: 6px;
 }

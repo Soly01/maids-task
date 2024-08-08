@@ -4,37 +4,22 @@
 .danger {
   color: var(--bs-danger);
 }
-.p-badge {
-  color: var(--background-color);
-  background-color: var(--bs-danger);
-}
-.p-button.p-button-danger,
-.p-buttonset.p-button-danger > .p-button,
-.p-splitbutton.p-button-danger > .p-button {
-  color: var(--bs-danger);
-  background-color: var(--background-color);
-  border-color: var(--bs-danger);
-}
+
 nav.nav {
-  background-color: var(--background-color);
+  background-color: var(--bg-300);
 }
-.search input {
-  border-radius: 7px;
-}
-.carti {
-  cursor: pointer;
-}
+
 .avatarDiv {
   cursor: pointer;
 }
 .blue {
-  background-color: #00365c;
+  background-color: #de283b;
   padding: 20px;
   border-radius: 50%;
-  border-color: #dc3545;
+  border-color: #005461;
 }
 .gold {
-  background-color: #edc580;
+  background-color: #2e8b57;
   padding: 20px;
   border-radius: 50%;
   border-color: #000;

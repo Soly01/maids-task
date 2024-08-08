@@ -1,23 +1,25 @@
 [data-theme="redandblue"] {
-  --background-color: #051622;
-  --secondry-color: #2c3e50;
-  --text-color: #dc3545;
-  --black-color: #000;
-  --bs-danger: #dc3545;
-  --hover-color: #1a1f24;
-  --body-color: white;
-  --box-shadow: 0 4px 8px rgba(220, 53, 70, 0.617);
-  --border-color: rgba(220, 53, 69, 0.5);
+  --primary-100: #de283b;
+  --primary-200: #ff6366;
+  --primary-300: #ffccc4;
+  --accent-100: #25b1bf;
+  --accent-200: #005461;
+  --text-100: #1a1a1a;
+  --text-200: #404040;
+  --bg-100: #ffffff;
+  --bg-200: #f5f5f5;
+  --bg-300: #cccccc;
 }
 
 [data-theme="blackandgold"] {
-  --background-color: #121212;
-  --secondry-color: #282828;
-  --text-color: #dbb776;
-  --black-color: black;
-  --bs-danger: #edc580;
-  --hover-color: #3d3d3d;
-  --body-color: #000;
-  --box-shadow: 0 4px 8px rgba(219, 183, 118, 0.5);
-  --border-color: rgba(219, 183, 118, 0.5);
+  --primary-100: #2e8b57;
+  --primary-200: #61bc84;
+  --primary-300: #c6ffe6;
+  --accent-100: #8fbc8f;
+  --accent-200: #345e37;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #1e1e1e;
+  --bg-200: #2d2d2d;
+  --bg-300: #454545;
 }
