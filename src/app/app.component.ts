@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject, inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { ToastModule } from 'primeng/toast';
-import { SearchPipe } from '../pipe/search.pipe';
+import { SearchPipe } from './core/pipe/search.pipe';
+import { platformBrowser } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,13 @@ import { SearchPipe } from '../pipe/search.pipe';
 })
 export class AppComponent {
   title = 'Maids-task';
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
   ngOnInit(): void {
-    const theme = localStorage.getItem('theme');
-    if (theme) {
-      document.body.setAttribute('data-theme', theme);
+    if (isPlatformBrowser(this.platformId)) {
+      const theme = localStorage.getItem('theme');
+      if (theme) {
+        document.body.setAttribute('data-theme', theme);
+      }
     }
   }
 }

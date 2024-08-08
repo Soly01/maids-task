@@ -2,16 +2,16 @@ import { CardModule } from 'primeng/card';
 import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { CardsService } from '../../services/cards.service';
 import { Subscription } from 'rxjs';
-import { User } from '../../../interface/user.interface';
+import { User } from '../../core/interface/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
 import { AvatarModule } from 'primeng/avatar';
-import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
 import { Store } from '@ngrx/store';
-import { loadUserDetails } from '../store/user.actions';
+import { getUserDetails } from '../../store/user.actions';
+import { CardsService } from '../../core/services/cards.service';
 
 @Component({
   selector: 'app-cards-details',
@@ -42,8 +42,7 @@ export class CardsDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.userId = +params['id'];
     });
-    this.store.dispatch(loadUserDetails({ id: this.userId }));
-
+    this.store.dispatch(getUserDetails({ id: this.userId }));
     this.userDetailsSubscription = this.cardsDetailsService
       .selectUserDetails()
       .subscribe({
@@ -53,9 +52,7 @@ export class CardsDetailsComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           if (err.status === 404) {
-            console.log('User not found');
-          } else {
-            console.log('An error occurred', err);
+            console.log(err.statusText);
           }
         },
       });

@@ -1,28 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  loadUsers,
-  loadUsersSuccess,
-  loadUsersFailure,
-  loadUserDetails,
-  loadUserDetailsSuccess,
+  getUsers,
+  getUsersSuccess,
+  getUsersFailure,
+  getUserDetails,
+  getUserDetailsSuccess,
 } from './user.actions';
-import {
-  UsersResponse,
-  initialState,
-  User,
-} from '../../../interface/user.interface';
+import { initialState } from '../core/interface/user.interface';
 
 export const userReducer = createReducer(
   initialState,
-  on(loadUsers, (state) => ({ ...state })),
+  on(getUsers, (state) => ({ ...state })),
 
-  on(loadUsersSuccess, (state, { usersResponse }) => ({
+  on(getUsersSuccess, (state, { usersResponse }) => ({
     ...state,
     usersResponse,
   })),
-  on(loadUserDetails, (state) => ({ ...state })),
+  on(getUserDetails, (state) => ({ ...state })),
 
-  on(loadUserDetailsSuccess, (state, { userDetails }) => ({
+  on(getUserDetailsSuccess, (state, { userDetails }) => ({
     ...state,
     userDetails,
   }))

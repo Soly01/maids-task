@@ -4,12 +4,14 @@ export const routes: Routes = [
   {
     path: 'cards',
     loadComponent: () =>
-      import('./cards/cards.component').then((c) => c.CardsComponent),
+      import('./components/cards/cards.component').then(
+        (c) => c.CardsComponent
+      ),
   },
   {
     path: 'cardsDetails/:id',
     loadComponent: () =>
-      import('./cards-details/cards-details.component').then(
+      import('./components/cards-details/cards-details.component').then(
         (c) => c.CardsDetailsComponent
       ),
   },

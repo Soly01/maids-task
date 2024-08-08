@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User, UsersResponse } from '../../interface/user.interface';
 import { Observable, of, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectUserDetails, selectUsers } from '../app/store/user.selectors';
+import { selectUserDetails, selectUsers } from '../../store/user.selectors';
+import { UsersRes, User } from '../interface/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +13,14 @@ export class CardsService {
   private usersDetailsCache = new Map<number, any>();
   private http = inject(HttpClient);
   private store = inject(Store);
-  getUsers(page: number): Observable<UsersResponse> {
+  getUsers(page: number): Observable<UsersRes> {
     if (this.usersCache.has(page)) {
       console.log(`Retrieving data for page ${page} from cache`);
       return of(this.usersCache.get(page));
     } else {
       console.log(`Fetching data for page ${page} from server`);
       return this.http
-        .get<UsersResponse>(`https://reqres.in/api/users?page=${page}`)
+        .get<UsersRes>(`https://reqres.in/api/users?page=${page}`)
         .pipe(
           tap((data) => {
             this.usersCache.set(page, data);
@@ -29,7 +29,7 @@ export class CardsService {
         );
     }
   }
-  selectAllUsers(): Observable<UsersResponse> {
+  selectAllUsers(): Observable<UsersRes> {
     return this.store.select(selectUsers);
   }
   getUserDetails(id: number): Observable<{ data: User }> {

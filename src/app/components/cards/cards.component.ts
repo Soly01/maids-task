@@ -7,24 +7,24 @@ import {
 } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { CardsService } from '../../services/cards.service';
 import { SkeletonModule } from 'primeng/skeleton';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UsersResponse } from '../../../interface/user.interface';
+import { UsersRes } from '../../core/interface/user.interface';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { SearchPipe } from '../../pipe/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
-import { OverlayDirective } from '../../directives/overlay.directive';
-import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { OverlayDirective } from '../../core/directives/overlay.directive';
+import { SkeletonComponent } from '../../shared/skeleton/skeleton.component';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Store } from '@ngrx/store';
-import { loadUsers } from '../store/user.actions';
+import { getUsers } from '../../store/user.actions';
+import { SearchPipe } from '../../core/pipe/search.pipe';
+import { CardsService } from '../../core/services/cards.service';
 
 @Component({
   selector: 'app-cards',
@@ -51,7 +51,7 @@ import { loadUsers } from '../store/user.actions';
 export class CardsComponent implements OnInit, OnDestroy {
   first: number = 0;
   rows: number = 1;
-  cards!: UsersResponse;
+  cards!: UsersRes;
   skeleton: any[] = [];
   searchTerm: string = '';
   perPage!: number;
@@ -65,20 +65,16 @@ export class CardsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.getUserCards();
-    this.store.dispatch(loadUsers({ Page: 1 }));
-    this.cardsSubscription = this.cardsService
-      .selectAllUsers()
-      .subscribe((data) => {
-        this.cards = data;
-        this.totalpages = data.total_pages;
-        this.perPage = data.per_page;
-        console.log(data);
-      });
+    const storedPage = localStorage.getItem('page');
+    const page = storedPage ? JSON.parse(storedPage) : 1;
+    this.first = (page - 1) * this.rows;
+    this.store.dispatch(getUsers({ Page: page }));
     this.cardsSubscription = this.cardsService.selectAllUsers().subscribe({
       next: (res) => {
         this.cards = res;
-        console.log(this.cards);
+        this.totalpages = res.total_pages;
+        this.perPage = res.per_page;
+        localStorage.setItem('page', JSON.stringify(res.page));
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
@@ -90,8 +86,9 @@ export class CardsComponent implements OnInit, OnDestroy {
 
   onPageChange(event: any): void {
     this.first = event.first;
-    const pagee = this.first / this.rows + 1;
-    this.store.dispatch(loadUsers({ Page: pagee }));
+    const page = this.first / this.rows + 1;
+    localStorage.setItem('page', JSON.stringify(page));
+    this.store.dispatch(getUsers({ Page: page }));
   }
   navigateToDetails(userId: number) {
     this.router.navigate([`cardsDetails/${userId}`]);

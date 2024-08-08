@@ -1,32 +1,32 @@
 import { createAction, props } from '@ngrx/store';
-import { UsersResponse, User } from '../../../interface/user.interface';
+import { UsersRes, User } from '../core/interface/user.interface';
 
-export const loadUsers = createAction(
-  '[User] Load Users',
+export const getUsers = createAction(
+  '[User] get Users',
   props<{ Page: number }>()
 );
 
-export const loadUsersSuccess = createAction(
-  '[User] Load Users Success',
-  props<{ usersResponse: UsersResponse }>()
+export const getUsersSuccess = createAction(
+  '[User] get Users Success',
+  props<{ usersResponse: UsersRes }>()
 );
 
-export const loadUsersFailure = createAction(
-  '[User] Load Users Failure',
+export const getUsersFailure = createAction(
+  '[User] get Users Failure',
   props<{ error: any }>()
 );
 
-export const loadUserDetails = createAction(
-  '[User] Load User Details',
+export const getUserDetails = createAction(
+  '[User] get User Details',
   props<{ id: number }>()
 );
 
-export const loadUserDetailsSuccess = createAction(
-  '[User] Load User Details Success',
+export const getUserDetailsSuccess = createAction(
+  '[User] get User Details Success',
   props<{ userDetails: User }>()
 );
 
-export const loadUserDetailsFailure = createAction(
-  '[User] Load User Details Failure',
+export const getUserDetailsFailure = createAction(
+  '[User] get User Details Failure',
   props<{ error: any }>()
 );

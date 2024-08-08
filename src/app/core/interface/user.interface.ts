@@ -6,7 +6,7 @@ export interface User {
   avatar: string;
 }
 
-export interface UsersResponse {
+export interface UsersRes {
   page: number;
   per_page: number;
   total: number;
@@ -14,7 +14,7 @@ export interface UsersResponse {
   data: User[];
 }
 export interface UserState {
-  usersResponse: UsersResponse;
+  usersResponse: UsersRes;
 
   userDetails: User | null;
 }

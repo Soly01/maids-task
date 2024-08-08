@@ -1,4 +1,4 @@
-import { User } from './../../interface/user.interface';
+import { User } from './core/interface/user.interface';
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 

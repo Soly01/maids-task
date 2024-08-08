@@ -1,16 +1,16 @@
-import { CardsService } from './../../services/cards.service';
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
-  loadUsers,
-  loadUsersSuccess,
-  loadUsersFailure,
-  loadUserDetails,
-  loadUserDetailsSuccess,
-  loadUserDetailsFailure,
+  getUsers,
+  getUsersSuccess,
+  getUsersFailure,
+  getUserDetails,
+  getUserDetailsSuccess,
+  getUserDetailsFailure,
 } from './user.actions';
+import { CardsService } from '../core/services/cards.service';
 
 @Injectable()
 export class UserEffects {
@@ -19,11 +19,11 @@ export class UserEffects {
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadUsers),
+      ofType(getUsers),
       switchMap(({ Page }) =>
         this.cardService.getUsers(Page).pipe(
-          map((usersResponse) => loadUsersSuccess({ usersResponse })),
-          catchError((error) => of(loadUsersFailure({ error })))
+          map((usersResponse) => getUsersSuccess({ usersResponse })),
+          catchError((error) => of(getUsersFailure({ error })))
         )
       )
     )
@@ -31,13 +31,13 @@ export class UserEffects {
 
   loadUserDetails$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadUserDetails),
+      ofType(getUserDetails),
       switchMap((action) =>
         this.cardService.getUserDetails(action.id).pipe(
           map((response) =>
-            loadUserDetailsSuccess({ userDetails: response.data })
+            getUserDetailsSuccess({ userDetails: response.data })
           ),
-          catchError((error) => of(loadUserDetailsFailure({ error })))
+          catchError((error) => of(getUserDetailsFailure({ error })))
         )
       )
     )

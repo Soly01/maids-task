@@ -28,8 +28,9 @@
     </p-card>
   </div>
   } @empty { @if (cards.data.length) {
-  <h5 class="w-100 title">Theres Nothing Here</h5>
+  <h5 class="text-center title position-absolute">Theres Nothing Here</h5>
   } @else { @for (skel of skeleton; track $index) {
+
   <app-skeleton [cardCount]="skeleton.length"></app-skeleton>} } }
 </div>
 <div class="w-100 d-flex justify-content-center mb-5 d-flex">
