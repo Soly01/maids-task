@@ -12,18 +12,7 @@ nav.nav {
 .avatarDiv {
   cursor: pointer;
 }
-.blue {
-  background-color: #de283b;
-  padding: 20px;
-  border-radius: 50%;
-  border-color: #005461;
-}
-.gold {
-  background-color: #2e8b57;
-  padding: 20px;
-  border-radius: 50%;
-  border-color: #000;
-}
+
 @media (max-width: 768px) {
   .tool {
     width: auto !important;
